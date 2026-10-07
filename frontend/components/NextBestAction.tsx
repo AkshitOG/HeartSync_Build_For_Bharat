@@ -24,33 +24,33 @@ export function NextBestAction({ action, targetRole }: NextBestActionProps) {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-blue-200/90 bg-white p-6 sm:p-8 shadow-sm">
-      {/* Decorative accent top line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500" />
+    <section className="relative overflow-hidden rounded-2xl border border-slate-300/80 bg-white p-6 sm:p-8 shadow-xs">
+      {/* Subtle top indicator bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-blue-600" />
 
       {/* Top Header Status */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
         <div className="flex items-center gap-2.5 flex-wrap">
-          <span className="px-3 py-1 rounded-full bg-blue-600 text-white font-semibold text-xs tracking-wide shadow-xs">
-            ONE NEXT BEST ACTION
+          <span className="px-3 py-1 rounded-md bg-blue-600 text-white font-bold text-[11px] tracking-wider uppercase">
+            Primary Career Recommendation
           </span>
-          <span className="text-xs px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-medium">
-            Primary Gap Targeted: <strong className="font-semibold text-amber-900">{action.primary_gap_targeted}</strong>
+          <span className="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200/80 font-medium">
+            Primary Gap Targeted: <strong className="font-semibold text-slate-900">{action.primary_gap_targeted}</strong>
           </span>
         </div>
-        <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full">
-          <span className="text-xs text-slate-500 font-medium">Net Leverage:</span>
-          <span className="text-sm font-bold text-blue-600 font-mono">
-            {action.leverage_score}
+        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1 rounded-lg">
+          <span className="text-xs text-slate-500 font-medium">Algorithmic Leverage:</span>
+          <span className="text-xs font-bold text-blue-700 font-mono">
+            {action.leverage_score} / 100
           </span>
         </div>
       </div>
 
       {/* Hero Title & Headline */}
-      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-2 leading-tight">
+      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mb-2 leading-tight">
         {action.title}
       </h3>
-      <p className="text-sm sm:text-base text-slate-600 font-normal mb-6 leading-relaxed max-w-4xl">
+      <p className="text-sm text-slate-600 mb-6 leading-relaxed max-w-4xl">
         {action.headline}
       </p>
 

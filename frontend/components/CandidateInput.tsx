@@ -252,10 +252,10 @@ B.S. in Statistics & Data Analytics | Metro University (2018 - 2022)
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleDrop}
-              className={`flex flex-col justify-center items-center border-2 border-dashed rounded-xl p-5 text-center transition cursor-pointer relative bg-slate-50/70 ${
+              className={`flex flex-col justify-center items-center border border-dashed rounded-xl p-5 text-center transition cursor-pointer relative ${
                 dragActive
-                  ? "border-blue-500 bg-blue-50/50"
-                  : "border-slate-300 hover:border-slate-400"
+                  ? "border-blue-500 bg-blue-50/40"
+                  : "border-slate-300/90 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-400"
               }`}
             >
               <input
@@ -264,32 +264,38 @@ B.S. in Statistics & Data Analytics | Metro University (2018 - 2022)
                 onChange={handleFileChange}
                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
               />
-              <svg
-                className="w-8 h-8 text-slate-400 mb-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.75"
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                />
-              </svg>
+              <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 mb-2.5">
+                <svg
+                  className="w-5 h-5 text-slate-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.75"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
               {file ? (
-                <div>
-                  <p className="text-xs font-bold text-blue-700 truncate max-w-[180px]">
-                    {file.name}
-                  </p>
+                <div className="bg-white border border-slate-200/90 rounded-lg p-2.5 w-full shadow-2xs">
+                  <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-900">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span className="truncate max-w-[170px]">{file.name}</span>
+                  </div>
                   <p className="text-[10px] text-slate-500 mt-0.5 font-mono">
-                    {(file.size / 1024).toFixed(1)} KB • Click to replace
+                    {(file.size / 1024).toFixed(1)} KB • Ready for analysis
                   </p>
                 </div>
               ) : (
                 <div>
-                  <p className="text-xs font-semibold text-slate-700">Drag &amp; drop resume PDF</p>
-                  <p className="text-[11px] text-slate-500 mt-1">or click to browse</p>
+                  <p className="text-xs font-semibold text-slate-800">Upload Resume PDF</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Drag &amp; drop or click to browse</p>
+                  <span className="inline-block mt-2 text-[10px] font-mono font-medium text-slate-500 bg-white border border-slate-200/80 px-2 py-0.5 rounded">
+                    PDF • TXT
+                  </span>
                 </div>
               )}
             </div>
