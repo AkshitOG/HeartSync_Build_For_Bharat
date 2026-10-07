@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "analytics_jobs_sample_size": 15841,
+    "datascience_jobs_sample_size": 1602,
+    "purpose": "Market Intelligence & Role DNA (Not Supervised Hiring Labels)"
+  },
+  "skill_frequency": {
+    "SQL": 1582,
+    "Python": 962,
+    "Machine Learning": 734,
+    "R": 756,
+    "SAS": 876,
+    "Excel": 626,
+    "Spark": 315,
+    "Hadoop": 329,
+    "Tableau": 201,
+    "Deep Learning": 163,
+    "Power BI": 89,
+    "AWS": 100
+  },
+  "top_15_skill_adjacencies": [
+    {
+      "skill_1": "Spark",
+      "skill_2": "Hadoop",
+      "pair": "Spark <-> Hadoop",
+      "cooccurrence_count": 179,
+      "jaccard_similarity": 0.3849462365591398,
+      "prob_s2_given_s1": 0.5682539682539682,
+      "prob_s1_given_s2": 0.5440729483282675
+    },
+    {
+      "skill_1": "Python",
+      "skill_2": "Machine Learning",
+      "pair": "Python <-> Machine Learning",
+      "cooccurrence_count": 400,
+      "jaccard_similarity": 0.30864197530864196,
+      "prob_s2_given_s1": 0.4158004158004158,
+      "prob_s1_given_s2": 0.5449591280653951
+    },
+    {
+      "skill_1": "R",
+      "skill_2": "SAS",
+      "pair": "R <-> SAS",
+      "cooccurrence_count": 331,
+      "jaccard_similarity": 0.2544196771714066,
+      "prob_s2_given_s1": 0.43783068783068785,
+      "prob_s1_given_s2": 0.3778538812785388
+    },
+    {
+      "skill_1": "Machine Learning",
+      "skill_2": "R",
+      "pair": "Machine Learning <-> R",
+      "cooccurrence_count": 292,
+      "jaccard_similarity": 0.24373956594323873,
+      "prob_s2_given_s1": 0.3978201634877384,
+      "prob_s1_given_s2": 0.3862433862433862
+    },
+    {
+      "skill_1": "Python",
+      "skill_2": "R",
+      "pair": "Python <-> R",
+      "cooccurrence_count": 305,
+      "jaccard_similarity": 0.21585279547062985,
+      "prob_s2_given_s1": 0.31704781704781704,
+      "prob_s1_given_s2": 0.40343915343915343
+    },
+    {
+      "skill_1": "Tableau",
+      "skill_2": "Power BI",
+      "pair": "Tableau <-> Power BI",
+      "cooccurrence_count": 35,
+      "jaccard_similarity": 0.13725490196078433,
+      "prob_s2_given_s1": 0.17412935323383086,
+      "prob_s1_given_s2": 0.39325842696629215
+    },
+    {
+      "skill_1": "Machine Learning",
+      "skill_2": "Deep Learning",
+      "pair": "Machine Learning <-> Deep Learning",
+      "cooccurrence_count": 105,
+      "jaccard_similarity": 0.13257575757575757,
+      "prob_s2_given_s1": 0.14305177111716622,
+      "prob_s1_given_s2": 0.6441717791411042
+    },
+    {
+      "skill_1": "SQL",
+      "skill_2": "SAS",
+      "pair": "SQL <-> SAS",
+      "cooccurrence_count": 270,
+      "jaccard_similarity": 0.12340036563071298,
+      "prob_s2_given_s1": 0.1706700379266751,
+      "prob_s1_given_s2": 0.3082191780821918
+    },
+    {
+      "skill_1": "SAS",
+      "skill_2": "Excel",
+      "pair": "SAS <-> Excel",
+      "cooccurrence_count": 162,
+      "jaccard_similarity": 0.1208955223880597,
+      "prob_s2_given_s1": 0.18493150684931506,
+      "prob_s1_given_s2": 0.25878594249201275
+    },
+    {
+      "skill_1": "SQL",
+      "skill_2": "R",
+      "pair": "SQL <-> R",
+      "cooccurrence_count": 244,
+      "jaccard_similarity": 0.11652340019102196,
+      "prob_s2_given_s1": 0.15423514538558786,
+      "prob_s1_given_s2": 0.32275132275132273
+    },
+    {
+      "skill_1": "SQL",
+      "skill_2": "Python",
+      "pair": "SQL <-> Python",
+      "cooccurrence_count": 257,
+      "jaccard_similarity": 0.11237428946217752,
+      "prob_s2_given_s1": 0.1624525916561315,
+      "prob_s1_given_s2": 0.26715176715176714
+    },
+    {
+      "skill_1": "SQL",
+      "skill_2": "Excel",
+      "pair": "SQL <-> Excel",
+      "cooccurrence_count": 211,
+      "jaccard_similarity": 0.10565848773159739,
+      "prob_s2_given_s1": 0.1333754740834387,
+      "prob_s1_given_s2": 0.33706070287539935
+    },
+    {
+      "skill_1": "R",
+      "skill_2": "Excel",
+      "pair": "R <-> Excel",
+      "cooccurrence_count": 101,
+      "jaccard_similarity": 0.07884465261514442,
+      "prob_s2_given_s1": 0.1335978835978836,
+      "prob_s1_given_s2": 0.16134185303514376
+    },
+    {
+      "skill_1": "Python",
+      "skill_2": "Deep Learning",
+      "pair": "Python <-> Deep Learning",
+      "cooccurrence_count": 78,
+      "jaccard_similarity": 0.07449856733524356,
+      "prob_s2_given_s1": 0.08108108108108109,
+      "prob_s1_given_s2": 0.4785276073619632
+    },
+    {
+      "skill_1": "Python",
+      "skill_2": "Spark",
+      "pair": "Python <-> Spark",
+      "cooccurrence_count": 87,
+      "jaccard_similarity": 0.073109243697479,
+      "prob_s2_given_s1": 0.09043659043659044,
+      "prob_s1_given_s2": 0.2761904761904762
+    }
+  ],
+  "role_benchmarks": [
+    {
+      "job_title": "Data Architect",
+      "total_postings": 528,
+      "records": 50,
+      "mean_salary_lakhs": 25.086,
+      "median_salary_lakhs": 24.25,
+      "mean_min_exp": 9.98,
+      "senior_roles_count": 50
+    },
+    {
+      "job_title": "Senior Data Scientist",
+      "total_postings": 2129,
+      "records": 185,
+      "mean_salary_lakhs": 22.28702702702703,
+      "median_salary_lakhs": 21.2,
+      "mean_min_exp": 3.9567567567567568,
+      "senior_roles_count": 185
+    },
+    {
+      "job_title": "Senior Data Engineer",
+      "total_postings": 3411,
+      "records": 183,
+      "mean_salary_lakhs": 18.998360655737702,
+      "median_salary_lakhs": 17.6,
+      "mean_min_exp": 4.5683060109289615,
+      "senior_roles_count": 183
+    },
+    {
+      "job_title": "Data Scientist",
+      "total_postings": 9051,
+      "records": 188,
+      "mean_salary_lakhs": 13.52659574468085,
+      "median_salary_lakhs": 12.8,
+      "mean_min_exp": 1.5372340425531914,
+      "senior_roles_count": 0
+    },
+    {
+      "job_title": "Senior Business Analyst",
+      "total_postings": 14115,
+      "records": 187,
+      "mean_salary_lakhs": 13.170588235294119,
+      "median_salary_lakhs": 13.0,
+      "mean_min_exp": 4.016042780748663,
+      "senior_roles_count": 187
+    },
+    {
+      "job_title": "Data Engineer",
+      "total_postings": 8044,
+      "records": 188,
+      "mean_salary_lakhs": 11.814893617021276,
+      "median_salary_lakhs": 10.850000000000001,
+      "mean_min_exp": 1.5106382978723405,
+      "senior_roles_count": 0
+    },
+    {
+      "job_title": "Machine Learning Engineer",
+      "total_postings": 964,
+      "records": 59,
+      "mean_salary_lakhs": 9.854237288135593,
+      "median_salary_lakhs": 9.1,
+      "mean_min_exp": 1.4406779661016949,
+      "senior_roles_count": 0
+    },
+    {
+      "job_title": "Senior Data Analyst",
+      "total_postings": 3825,
+      "records": 187,
+      "mean_salary_lakhs": 9.570588235294117,
+      "median_salary_lakhs": 8.6,
+      "mean_min_exp": 2.855614973262032,
+      "senior_roles_count": 187
+    },
+    {
+      "job_title": "Business Analyst",
+      "total_postings": 32843,
+      "records": 188,
+      "mean_salary_lakhs": 8.947340425531914,
+      "median_salary_lakhs": 8.3,
+      "mean_min_exp": 1.702127659574468,
+      "senior_roles_count": 0
+    },
+    {
+      "job_title": "Data Analyst",
+      "total_postings": 18095,
+      "records": 187,
+      "mean_salary_lakhs": 5.710695187165776,
+      "median_salary_lakhs": 5.0,
+      "mean_min_exp": 0.8235294117647058,
+      "senior_roles_count": 0
+    }
+  ],
+  "seniority_salary_differential": {
+    "0": {
+      "mean_salary": 9.994567901234568,
+      "median_salary": 9.3,
+      "mean_exp": 1.3975308641975308,
+      "total_postings": 68997
+    },
+    "1": {
+      "mean_salary": 16.548863636363638,
+      "median_salary": 15.5,
+      "mean_exp": 4.232323232323233,
+      "total_postings": 24008
+    }
+  }
+}

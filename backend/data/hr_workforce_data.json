@@ -1,0 +1,133 @@
+{
+  "overview": {
+    "total_employees": 48,
+    "active_departments": 5,
+    "overall_attendance_pct": 94.2,
+    "tasks_assigned_this_cycle": 142,
+    "tasks_completed_this_cycle": 118,
+    "pending_critical_tasks": 24,
+    "average_workforce_tenure_months": 22.4,
+    "health_index": "Stable (Attention Needed in Engineering)"
+  },
+  "departments": [
+    {
+      "name": "Engineering",
+      "headcount": 18,
+      "attendance_pct": 91.5,
+      "workload_status": "Overloaded",
+      "pending_tasks": 14,
+      "key_focus_area": "Sprint velocity bottleneck & backend PR turnaround delays"
+    },
+    {
+      "name": "Data & Analytics",
+      "headcount": 12,
+      "attendance_pct": 96.4,
+      "workload_status": "Optimal",
+      "pending_tasks": 3,
+      "key_focus_area": "BI migration on track; requested distributed computing training"
+    },
+    {
+      "name": "Operations",
+      "headcount": 8,
+      "attendance_pct": 89.2,
+      "workload_status": "Moderate",
+      "pending_tasks": 4,
+      "key_focus_area": "Monday shift absenteeism anomaly detected"
+    },
+    {
+      "name": "Product & Design",
+      "headcount": 6,
+      "attendance_pct": 97.8,
+      "workload_status": "Optimal",
+      "pending_tasks": 2,
+      "key_focus_area": "Q4 roadmap specs completed ahead of schedule"
+    },
+    {
+      "name": "Client Solutions",
+      "headcount": 4,
+      "attendance_pct": 96.0,
+      "workload_status": "Optimal",
+      "pending_tasks": 1,
+      "key_focus_area": "Quarterly target achievement at 104%"
+    }
+  ],
+  "daily_brief": {
+    "date": "Today's Executive Brief",
+    "attention_items_count": 3,
+    "items": [
+      {
+        "id": "brief-01",
+        "category": "Workload Concentration",
+        "department": "Engineering",
+        "severity": "High",
+        "title": "High Pending Workload & PR Review Bottleneck",
+        "evidence": "14 critical tasks are currently stalled; 62% of pending code reviews are queued on only 3 senior backend engineers.",
+        "recommended_action": "Distribute architectural review duties to mid-level engineers and schedule a focus-block day with no meetings."
+      },
+      {
+        "id": "brief-02",
+        "category": "Attendance Pattern",
+        "department": "Operations",
+        "severity": "Medium",
+        "title": "Recurring Monday Shift Absenteeism",
+        "evidence": "Operations attendance drops to 84.1% on Mondays vs 94.6% on Wednesdays across the last 4 consecutive payroll cycles.",
+        "recommended_action": "Initiate a 1-on-1 shift adjustment review with Operations Lead to test hybrid rotational coverage."
+      },
+      {
+        "id": "brief-03",
+        "category": "Employee Request",
+        "department": "Data & Analytics",
+        "severity": "Low",
+        "title": "Pending Technical Certification Subsidies",
+        "evidence": "4 analytics specialists submitted requests for PySpark & AWS certification reimbursements pending approval for 12 days.",
+        "recommended_action": "Approve quarterly skill upskilling allocation to prevent turnover in high-demand analytics competencies."
+      }
+    ]
+  },
+  "insights": [
+    {
+      "category": "Workforce Retention",
+      "observation": "High Correlation Between Storytelling Training and Promotion Velocity",
+      "evidence_trail": "JDS capability data indicates employees with dashboarding & storytelling skills had 3.06x higher probability of upward compensation hikes.",
+      "strategic_recommendation": "Incorporate business storytelling workshops into technical engineering onboarding tracks."
+    },
+    {
+      "category": "Capacity Allocation",
+      "observation": "Backend Team Operating at 118% Normal Velocity Baseline",
+      "evidence_trail": "Average weekly commit count increased by 34% over the past 3 weeks without corresponding headcount addition.",
+      "strategic_recommendation": "Protect senior developer time by filtering ad-hoc support tickets through L1 triage."
+    },
+    {
+      "category": "Skill Adjacency Bridge",
+      "observation": "Analytics Team Readily Pivotable to Machine Learning Workstreams",
+      "evidence_trail": "Market intelligence shows 54.5% skill co-occurrence between Python and ML; analytics team already demonstrates strong Python baseline.",
+      "strategic_recommendation": "Transition 2 senior analysts into junior ML modeling tasks rather than external contractor hiring."
+    }
+  ],
+  "hr_desk_qa": [
+    {
+      "query_triggers": ["workload", "pending", "overloaded", "engineering", "tasks"],
+      "answer": "Engineering currently has the highest pending workload across the workforce with 14 critical tasks queued.",
+      "evidence": "62% of review tickets are assigned to 3 senior developers. Average resolution time increased from 1.2 to 3.8 days.",
+      "recommended_action": "Empower mid-level developers to conduct initial PR passes and enforce a 2-hour daily meeting moratorium."
+    },
+    {
+      "query_triggers": ["attendance", "absent", "leave", "operations", "monday"],
+      "answer": "Operations exhibits a recurring attendance anomaly with an 84.1% rate on Mondays compared to a 94.2% company baseline.",
+      "evidence": "Trend confirmed across 4 consecutive payroll cycles with 3 specific team members driving the differential.",
+      "recommended_action": "Hold an informal shift preference check-in with Operations Lead to explore staggered weekend coverage."
+    },
+    {
+      "query_triggers": ["brief", "issues", "today", "attention", "urgent"],
+      "answer": "Today's HR brief highlights 3 priority items: Engineering PR backlog (High), Operations Monday attendance drop (Medium), and 4 pending data analytics certification requests (Low).",
+      "evidence": "Summarized from real-time workforce event logs and ticket queues.",
+      "recommended_action": "Review the Daily HR Brief panel and approve the certification requests before the end of the day."
+    },
+    {
+      "query_triggers": ["support", "burnout", "turnover", "risk", "stress"],
+      "answer": "The senior backend engineers (Tech Lead & 2 Staff Engineers) represent the highest burnout risk due to task concentration.",
+      "evidence": "Working hours logged show consecutive 50+ hour sprint weeks over the last 3 release cycles.",
+      "recommended_action": "Shift non-critical maintenance tasks to the upcoming sprint and provide comp-off recharge days."
+    }
+  ]
+}

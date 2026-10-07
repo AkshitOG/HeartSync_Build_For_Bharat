@@ -1,0 +1,57 @@
+{
+  "model_name": "technical_capability_logistic_regression",
+  "model_type": "LogisticRegression",
+  "dataset": "technical_capability",
+  "dataset_source": "JDS Skill Traits",
+  "rows_trained": 139,
+  "purpose": "technical capability signal",
+  "pipeline_steps": [
+    "StandardScaler",
+    "LogisticRegression"
+  ],
+  "feature_order": [
+    "big_data_skills",
+    "maths-stats_skills",
+    "coding_skills",
+    "ai_and_ml_skills",
+    "dashboard_and_storytelling_skills"
+  ],
+  "accuracy": 0.8529,
+  "balanced_accuracy": 0.8505,
+  "precision": 0.8417,
+  "recall": 0.8952,
+  "f1": 0.8651,
+  "roc_auc": 0.9035,
+  "validation_protocol": "5-fold x 5-repeat Stratified K-Fold Cross-Validation (25 evaluations)",
+  "coefficients": {
+    "big_data_skills": 0.6831415806477931,
+    "maths-stats_skills": 1.284236414526359,
+    "coding_skills": 0.5332341104496959,
+    "ai_and_ml_skills": 0.7623949323347861,
+    "dashboard_and_storytelling_skills": 1.1173811826128819
+  },
+  "intercept": -0.22071614828103267,
+  "feature_means": {
+    "big_data_skills": 3.8496402877697844,
+    "maths-stats_skills": 4.293525179856115,
+    "coding_skills": 4.2683453237410065,
+    "ai_and_ml_skills": 4.566187050359712,
+    "dashboard_and_storytelling_skills": 4.355395683453238
+  },
+  "feature_scales": {
+    "big_data_skills": 0.8435428968396037,
+    "maths-stats_skills": 0.8408807161912906,
+    "coding_skills": 0.8897526914679917,
+    "ai_and_ml_skills": 0.6646851320169521,
+    "dashboard_and_storytelling_skills": 0.9296996236404503
+  },
+  "classes": [
+    0,
+    1
+  ],
+  "class_labels": {
+    "0": "Lower Technical Capability Baseline",
+    "1": "Higher Technical Capability Baseline"
+  },
+  "model_version": "1.0.0"
+}

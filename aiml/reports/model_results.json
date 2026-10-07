@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "n_splits": 5,
+    "n_repeats": 5,
+    "total_cv_evaluations": 25,
+    "random_state": 42
+  },
+  "jds": {
+    "dataset": "JDS Skill Traits",
+    "rows": 139,
+    "features": [
+      "big_data_skills",
+      "maths-stats_skills",
+      "coding_skills",
+      "ai_and_ml_skills",
+      "dashboard_and_storytelling_skills"
+    ],
+    "target": "salary_hike_high_or_low",
+    "class_distribution": {
+      "class_1_high_hike": 73,
+      "class_0_low_hike": 66,
+      "class_1_pct": 0.5251798561151079,
+      "class_0_pct": 0.4748201438848921
+    },
+    "summary_metrics": {
+      "Dummy (most_frequent)": {
+        "accuracy_mean": 0.5251322751322751,
+        "accuracy_std": 0.014221883656841914,
+        "balanced_accuracy_mean": 0.5,
+        "balanced_accuracy_std": 0.0,
+        "precision_mean": 0.5251322751322751,
+        "precision_std": 0.014221883656841914,
+        "recall_mean": 1.0,
+        "recall_std": 0.0,
+        "f1_mean": 0.6885233503497825,
+        "f1_std": 0.012330951467385953,
+        "roc_auc_mean": 0.5,
+        "roc_auc_std": 0.0
+      },
+      "Logistic Regression": {
+        "accuracy_mean": 0.852910052910053,
+        "accuracy_std": 0.06892435631490539,
+        "balanced_accuracy_mean": 0.8504761904761905,
+        "balanced_accuracy_std": 0.07055707664023043,
+        "precision_mean": 0.8417372050034589,
+        "precision_std": 0.08103833690827043,
+        "recall_mean": 0.8952380952380953,
+        "recall_std": 0.07467541251014347,
+        "f1_mean": 0.8651173246333882,
+        "f1_std": 0.06379965095386714,
+        "roc_auc_mean": 0.9035442176870748,
+        "roc_auc_std": 0.05824268490708041
+      },
+      "Decision Tree": {
+        "accuracy_mean": 0.7840740740740741,
+        "accuracy_std": 0.06263003884645137,
+        "balanced_accuracy_mean": 0.7815970695970696,
+        "balanced_accuracy_std": 0.06190816732077267,
+        "precision_mean": 0.7787868985160006,
+        "precision_std": 0.06672702417198724,
+        "recall_mean": 0.8335238095238096,
+        "recall_std": 0.1115423106934312,
+        "f1_mean": 0.8000465185610119,
+        "f1_std": 0.061624064501755914,
+        "roc_auc_mean": 0.8198529565672422,
+        "roc_auc_std": 0.07496835678602597
+      },
+      "Random Forest": {
+        "accuracy_mean": 0.8371957671957673,
+        "accuracy_std": 0.07089544330343339,
+        "balanced_accuracy_mean": 0.8365347985347985,
+        "balanced_accuracy_std": 0.07001406061164658,
+        "precision_mean": 0.8454813617754795,
+        "precision_std": 0.06989064621810621,
+        "recall_mean": 0.8493333333333333,
+        "recall_std": 0.10356791455450898,
+        "f1_mean": 0.8439957175482203,
+        "f1_std": 0.06969069999767842,
+        "roc_auc_mean": 0.8832778649921507,
+        "roc_auc_std": 0.06468506792705792
+      }
+    },
+    "interpretations": {
+      "Logistic Regression": {
+        "intercept": -0.22071614828103267,
+        "features": [
+          {
+            "feature": "maths-stats_skills",
+            "coefficient": 1.284236414526359,
+            "odds_ratio": 3.6119089027942786,
+            "abs_magnitude": 1.284236414526359,
+            "direction": "Positive"
+          },
+          {
+            "feature": "dashboard_and_storytelling_skills",
+            "coefficient": 1.1173811826128819,
+            "odds_ratio": 3.056838410346568,
+            "abs_magnitude": 1.1173811826128819,
+            "direction": "Positive"
+          },
+          {
+            "feature": "ai_and_ml_skills",
+            "coefficient": 0.7623949323347861,
+            "odds_ratio": 2.143403384512778,
+            "abs_magnitude": 0.7623949323347861,
+            "direction": "Positive"
+          },
+          {
+            "feature": "big_data_skills",
+            "coefficient": 0.6831415806477931,
+            "odds_ratio": 1.9800885791451923,
+            "abs_magnitude": 0.6831415806477931,
+            "direction": "Positive"
+          },
+          {
+            "feature": "coding_skills",
+            "coefficient": 0.5332341104496959,
+            "odds_ratio": 1.7044357379033475,
+            "abs_magnitude": 0.5332341104496959,
+            "direction": "Positive"
+          }
+        ]
+      },
+      "Decision Tree": {
+        "max_depth": 3,
+        "n_leaves": 6,
+        "features": [
+          {
+            "feature": "dashboard_and_storytelling_skills",
+            "importance": 0.6254978532218184
+          },
+          {
+            "feature": "maths-stats_skills",
+            "importance": 0.2791656730748368
+          },
+          {
+            "feature": "coding_skills",
+            "importance": 0.09533647370334483
+          },
+          {
+            "feature": "big_data_skills",
+            "importance": 0.0
+          },
+          {
+            "feature": "ai_and_ml_skills",
+            "importance": 0.0
+          }
+        ]
+      },
+      "Random Forest": {
+        "n_estimators": 100,
+        "features": [
+          {
+            "feature": "dashboard_and_storytelling_skills",
+            "importance": 0.36799348943628574
+          },
+          {
+            "feature": "maths-stats_skills",
+            "importance": 0.2360034923297363
+          },
+          {
+            "feature": "ai_and_ml_skills",
+            "importance": 0.16824629967774649
+          },
+          {
+            "feature": "coding_skills",
+            "importance": 0.1533378239896363
+          },
+          {
+            "feature": "big_data_skills",
+            "importance": 0.07441889456659517
+          }
+        ]
+      }
+    }
+  },
+  "sds": {
+    "dataset": "SDS Personality Traits",
+    "rows": 161,
+    "features": [
+      "neuroticism",
+      "extraversion",
+      "openness_to_experience",
+      "agreeableness",
+      "conscientiousness"
+    ],
+    "target": "success_classification_high_low",
+    "class_distribution": {
+      "class_1_high_success": 85,
+      "class_0_low_success": 76,
+      "class_1_pct": 0.5279503105590062,
+      "class_0_pct": 0.4720496894409938
+    },
+    "summary_metrics": {
+      "Dummy (most_frequent)": {
+        "accuracy_mean": 0.528030303030303,
+        "accuracy_std": 0.006439393939393945,
+        "balanced_accuracy_mean": 0.5,
+        "balanced_accuracy_std": 0.0,
+        "precision_mean": 0.528030303030303,
+        "precision_std": 0.006439393939393945,
+        "recall_mean": 1.0,
+        "recall_std": 0.0,
+        "f1_mean": 0.6911020408163264,
+        "f1_std": 0.005551020408163243,
+        "roc_auc_mean": 0.5,
+        "roc_auc_std": 0.0
+      },
+      "Logistic Regression": {
+        "accuracy_mean": 0.9218560606060606,
+        "accuracy_std": 0.04894660562306852,
+        "balanced_accuracy_mean": 0.9198970588235293,
+        "balanced_accuracy_std": 0.05046848809942605,
+        "precision_mean": 0.9071202806481443,
+        "precision_std": 0.0667294543725566,
+        "recall_mean": 0.9552941176470588,
+        "recall_std": 0.05068390406714829,
+        "f1_mean": 0.9287162528756956,
+        "f1_std": 0.04382494615732376,
+        "roc_auc_mean": 0.9638725490196078,
+        "roc_auc_std": 0.037007693745841626
+      },
+      "Decision Tree": {
+        "accuracy_mean": 0.905530303030303,
+        "accuracy_std": 0.056866948768673646,
+        "balanced_accuracy_mean": 0.9038823529411765,
+        "balanced_accuracy_std": 0.05614361784462073,
+        "precision_mean": 0.9011561702831052,
+        "precision_std": 0.06615901336063326,
+        "recall_mean": 0.9317647058823529,
+        "recall_std": 0.10347592201080483,
+        "f1_mean": 0.9105266421756484,
+        "f1_std": 0.05884966700470525,
+        "roc_auc_mean": 0.9402647058823529,
+        "roc_auc_std": 0.04085916020555007
+      },
+      "Random Forest": {
+        "accuracy_mean": 0.9440151515151516,
+        "accuracy_std": 0.041451164468717556,
+        "balanced_accuracy_mean": 0.9433137254901961,
+        "balanced_accuracy_std": 0.04041373222084857,
+        "precision_mean": 0.9436980687011648,
+        "precision_std": 0.049528980215134785,
+        "recall_mean": 0.955294117647059,
+        "recall_std": 0.07675061849552983,
+        "f1_mean": 0.9464880828673278,
+        "f1_std": 0.04282348314793311,
+        "roc_auc_mean": 0.9959607843137255,
+        "roc_auc_std": 0.007294908243049373
+      }
+    },
+    "interpretations": {
+      "Logistic Regression": {
+        "intercept": -0.5034566443766834,
+        "features": [
+          {
+            "feature": "conscientiousness",
+            "coefficient": 2.093629895659753,
+            "odds_ratio": 8.114315891272708,
+            "abs_magnitude": 2.093629895659753,
+            "direction": "Positive"
+          },
+          {
+            "feature": "openness_to_experience",
+            "coefficient": 2.043374064803812,
+            "odds_ratio": 7.716601638125187,
+            "abs_magnitude": 2.043374064803812,
+            "direction": "Positive"
+          },
+          {
+            "feature": "extraversion",
+            "coefficient": 0.9537538165964264,
+            "odds_ratio": 2.5954341797625204,
+            "abs_magnitude": 0.9537538165964264,
+            "direction": "Positive"
+          },
+          {
+            "feature": "neuroticism",
+            "coefficient": 0.7984633030821645,
+            "odds_ratio": 2.222123572999452,
+            "abs_magnitude": 0.7984633030821645,
+            "direction": "Positive"
+          },
+          {
+            "feature": "agreeableness",
+            "coefficient": 0.6277718727653164,
+            "odds_ratio": 1.8734316812836176,
+            "abs_magnitude": 0.6277718727653164,
+            "direction": "Positive"
+          }
+        ]
+      },
+      "Decision Tree": {
+        "max_depth": 3,
+        "n_leaves": 4,
+        "features": [
+          {
+            "feature": "openness_to_experience",
+            "importance": 0.6258311050363212
+          },
+          {
+            "feature": "conscientiousness",
+            "importance": 0.33336247447757716
+          },
+          {
+            "feature": "agreeableness",
+            "importance": 0.04080642048610159
+          },
+          {
+            "feature": "neuroticism",
+            "importance": 0.0
+          },
+          {
+            "feature": "extraversion",
+            "importance": 0.0
+          }
+        ]
+      },
+      "Random Forest": {
+        "n_estimators": 100,
+        "features": [
+          {
+            "feature": "conscientiousness",
+            "importance": 0.38037874649684666
+          },
+          {
+            "feature": "openness_to_experience",
+            "importance": 0.3241170108643881
+          },
+          {
+            "feature": "extraversion",
+            "importance": 0.13720413961555947
+          },
+          {
+            "feature": "agreeableness",
+            "importance": 0.13638761210362968
+          },
+          {
+            "feature": "neuroticism",
+            "importance": 0.021912490919576064
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerGPS — Highest-Leverage Next Career Action</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-600 selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="h-9 w-9 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+          GPS
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            CareerGPS
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-950 text-indigo-400 border border-indigo-800/80">MVP Decision Engine</span>
+          </h1>
+          <p class="text-xs text-slate-400">Determining your single highest-leverage career action</p>
+        </div>
+      </div>
+      <div class="text-xs text-slate-400 hidden sm:flex items-center gap-4">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Deterministic Priority</span>
+        <span class="text-slate-600">|</span>
+        <span>Zero Fake Data</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
+    
+    <!-- Input Form Section -->
+    <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl mb-8">
+      <div class="max-w-3xl mb-6">
+        <h2 class="text-xl font-bold text-white mb-1">Candidate Evidence Intake</h2>
+        <p class="text-sm text-slate-400">
+          Provide your actual resume and GitHub profile. CareerGPS reasons directly from detected evidence—no fake proficiency percentages, no generic 10-step roadmaps.
+        </p>
+      </div>
+
+      <form id="analyzeForm" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Target Role *</label>
+            <select id="targetRole" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition">
+              <option value="backend-engineer">Backend Engineer</option>
+              <option value="machine-learning-engineer">Machine Learning Engineer</option>
+              <option value="frontend-engineer">Frontend Engineer</option>
+            </select>
+            <p class="text-[11px] text-slate-500 mt-1.5">Loads calibrated Target Role DNA standards & evidence criteria.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">GitHub Handle / URL (Optional)</label>
+            <input type="text" id="githubHandle" placeholder="e.g. torvalds or https://github.com/..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 placeholder-slate-600 transition" />
+            <p class="text-[11px] text-slate-500 mt-1.5">Detects public repositories, languages, and project code signals.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Resume (Paste text or upload PDF) *</label>
+            <span class="text-xs text-slate-500">Plain text or PDF supported</span>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2">
+              <textarea id="resumeText" rows="6" placeholder="Paste your resume experience, projects, and skills here..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 placeholder-slate-600 transition font-mono"></textarea>
+            </div>
+            
+            <div class="flex flex-col justify-between border-2 border-dashed border-slate-800 hover:border-slate-700 rounded-lg p-4 text-center bg-slate-950/50 transition">
+              <div class="my-auto">
+                <svg class="mx-auto h-8 w-8 text-slate-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <p class="text-xs text-slate-400 font-medium">Or upload resume PDF</p>
+                <input type="file" id="resumeFile" accept=".pdf,.txt" class="mt-3 block w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-950 file:text-indigo-400 hover:file:bg-indigo-900 cursor-pointer" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+          <p class="text-xs text-slate-500">
+            Rule: CareerGPS reports <strong class="text-slate-400">Detected Evidence</strong> with confidence, never unsupported "verified expert" claims.
+          </p>
+          <button type="submit" id="submitBtn" class="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 transition flex items-center gap-2">
+            <span>Analyze & Determine Action</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Empty State Prompt (Visible before first analysis) -->
+    <div id="emptyState" class="border border-slate-800/80 rounded-2xl bg-slate-900/40 p-12 text-center max-w-2xl mx-auto my-12">
+      <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+        ?
+      </div>
+      <h3 class="text-lg font-semibold text-white mb-2">No Candidate Analysis Yet</h3>
+      <p class="text-sm text-slate-400 leading-relaxed mb-4">
+        Enter your resume text or upload your PDF and target role above. CareerGPS will parse your evidence ladder, compare it with Target Role DNA, calculate your evidence deficit, and generate your <span class="text-indigo-400 font-semibold">ONE Next Best Action</span>.
+      </p>
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-slate-800/60 text-xs text-slate-400 border border-slate-700">
+        <span>No sample or fabricated candidates populated. Real candidate evaluation only.</span>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="hidden border border-slate-800 rounded-2xl bg-slate-900/60 p-12 text-center max-w-xl mx-auto my-12">
+      <div class="inline-block animate-spin w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full mb-4"></div>
+      <h3 class="text-base font-semibold text-white mb-1">Evaluating Candidate Intelligence...</h3>
+      <p class="text-xs text-slate-400">Extracting evidence ladder, calculating role gaps, and identifying maximum leverage action.</p>
+    </div>
+
+    <!-- Output Dashboard (Initially Hidden) -->
+    <div id="resultsDashboard" class="hidden space-y-8">
+      
+      <!-- HERO: ONE NEXT BEST ACTION -->
+      <section class="border-2 border-indigo-500/80 bg-gradient-to-br from-indigo-950/40 via-slate-900 to-slate-900 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 transform translate-x-4 -translate-y-4 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-md bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider shadow-md">
+              ONE NEXT BEST ACTION
+            </span>
+            <span id="heroPrimaryGapBadge" class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+              Primary Gap: PostgreSQL
+            </span>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400">Leverage Score:</span>
+            <span id="heroLeverageScore" class="ml-1 text-sm font-bold text-indigo-400 font-mono">92.4</span>
+          </div>
+        </div>
+
+        <h3 id="heroActionTitle" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+          Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL
+        </h3>
+        <p id="heroActionHeadline" class="text-sm sm:text-base text-slate-300 font-medium mb-6">
+          Engineer an end-to-end relational API featuring migrations, transactions, indexing, and automated tests.
+        </p>
+
+        <!-- What to Build & Expected Evidence Artifacts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-slate-950/70 border border-slate-800 rounded-xl p-5 mb-6">
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-300 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              What You Must Build
+            </h4>
+            <ul id="heroBuildList" class="space-y-2 text-xs sm:text-sm text-slate-300">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-300 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Expected Verifiable Evidence Artifacts
+            </h4>
+            <ul id="heroArtifactList" class="space-y-2 text-xs sm:text-sm text-slate-300">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Explainability & Counterfactual Reasoning Callouts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900/90 border border-slate-800 rounded-lg p-4">
+            <span class="text-xs font-bold text-amber-400 block mb-1">WHY THIS ACTION?</span>
+            <p id="heroWhyThis" class="text-xs text-slate-300 leading-relaxed"></p>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 rounded-lg p-4">
+            <span class="text-xs font-bold text-indigo-400 block mb-1">COUNTERFACTUAL COMPARISON (WHY IT BEATS RUNNER-UP)</span>
+            <p id="heroCounterfactual" class="text-xs text-slate-300 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Readiness Impact Banner & Action Feedback Widget -->
+        <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-200">Simulated Readiness Delta:</span>
+            <span id="heroReadinessPreview" class="text-indigo-300"></span>
+          </div>
+          <div id="heroSecondaryGaps" class="flex items-center gap-1.5 flex-wrap">
+            <!-- Badges of secondary gaps closed -->
+          </div>
+        </div>
+
+        <!-- Minimal Feedback Loop (Outcome Moat) -->
+        <div id="feedbackContainer" class="mt-4 p-3 bg-slate-950/80 border border-slate-800/90 rounded-lg flex items-center justify-between flex-wrap gap-3">
+          <div class="text-xs">
+            <span class="text-slate-300 font-semibold">Was this recommendation high-leverage and clear?</span>
+            <span class="text-slate-500 text-[11px] block">Helps train the decision engine's counterfactual rules</span>
+          </div>
+          <div class="flex items-center gap-2" id="feedbackActionButtons">
+            <button onclick="submitFeedback(true)" class="px-3 py-1 rounded bg-slate-800 hover:bg-emerald-950 hover:text-emerald-300 border border-slate-700 text-xs text-slate-300 transition">
+              👍 Yes, makes sense
+            </button>
+            <button onclick="submitFeedback(false)" class="px-3 py-1 rounded bg-slate-800 hover:bg-rose-950 hover:text-rose-300 border border-slate-700 text-xs text-slate-300 transition">
+              👎 No, missed priority
+            </button>
+          </div>
+          <div id="feedbackAck" class="hidden text-xs text-emerald-400 font-medium">
+            ✓ Feedback captured for decision calibration.
+          </div>
+        </div>
+      </section>
+
+      <!-- 2-COLUMN SECTION: READINESS & SKILL GAPS -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left: Honest Role Readiness (No Fake Precision) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-base font-bold text-white">Target Role Readiness</h3>
+              <span id="readinessRoleBadge" class="text-xs font-mono text-indigo-400 px-2 py-0.5 rounded bg-slate-950 border border-slate-800"></span>
+            </div>
+            
+            <p id="readinessVerdict" class="text-xs text-slate-400 mb-6 leading-relaxed"></p>
+
+            <div class="space-y-4">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-1.5">
+                  <span class="font-semibold text-emerald-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Strong Evidence
+                  </span>
+                  <span id="strongCount" class="font-mono text-slate-400">0</span>
+                </div>
+                <div id="strongList" class="flex flex-wrap gap-1.5 min-h-[28px]"></div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between text-xs mb-1.5">
+                  <span class="font-semibold text-amber-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Needs Stronger Evidence
+                  </span>
+                  <span id="needsCount" class="font-mono text-slate-400">0</span>
+                </div>
+                <div id="needsList" class="flex flex-wrap gap-1.5 min-h-[28px]"></div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between text-xs mb-1.5">
+                  <span class="font-semibold text-rose-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span> Major Evidence Gaps
+                  </span>
+                  <span id="majorCount" class="font-mono text-slate-400">0</span>
+                </div>
+                <div id="majorList" class="flex flex-wrap gap-1.5 min-h-[28px]"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800 text-[11px] text-slate-500">
+            * Readiness categorizes demonstrable evidence. It does not output arbitrary single-number proficiency scores.
+          </div>
+        </div>
+
+        <!-- Right: Deterministic Gap Ranking & Evidence Deficit (2 Cols) -->
+        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-bold text-white">Ranked Skill Gaps</h3>
+              <p class="text-xs text-slate-400">Formula: Target Importance × Evidence Deficit × Actionability</p>
+            </div>
+            <span class="text-xs text-slate-500 font-mono">Ranked by Leverage</span>
+          </div>
+
+          <div id="gapsContainer" class="space-y-3">
+            <!-- Dynamically populated gap cards -->
+          </div>
+        </div>
+      </div>
+
+      <!-- DETECTED CANDIDATE EVIDENCE BREAKDOWN -->
+      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white">Candidate Intelligence — Detected Evidence Chain</h3>
+            <p class="text-xs text-slate-400">Every skill is mapped to its source, evidence ladder tier, and detection confidence.</p>
+          </div>
+          <div class="text-xs text-slate-400 font-mono">
+            Signals: <span id="totalSignalsBadge" class="text-indigo-400 font-bold">0</span> | Repos Analyzed: <span id="reposAnalyzedBadge" class="text-indigo-400 font-bold">0</span>
+          </div>
+        </div>
+
+        <div id="detectedSkillsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamically populated skill evidence cards -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-900 py-6 text-center text-xs text-slate-600">
+    CareerGPS Decision Engine • Built for Bharat 2.0 • Honest Evidence Modeling • Zero Fabricated Users
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    const form = document.getElementById('analyzeForm');
+    const emptyState = document.getElementById('emptyState');
+    const loadingState = document.getElementById('loadingState');
+    const resultsDashboard = document.getElementById('resultsDashboard');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const targetRole = document.getElementById('targetRole').value;
+      const githubHandle = document.getElementById('githubHandle').value;
+      const resumeText = document.getElementById('resumeText').value;
+      const fileInput = document.getElementById('resumeFile');
+      const file = fileInput.files[0];
+
+      if (!resumeText.trim() && !file && !githubHandle.trim()) {
+        alert("Please provide resume text, upload a PDF resume, or enter a GitHub handle.");
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      resultsDashboard.classList.add('hidden');
+      loadingState.classList.remove('hidden');
+      submitBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('target_role', targetRole);
+      if (resumeText) formData.append('resume_text', resumeText);
+      if (githubHandle) formData.append('github_handle', githubHandle);
+      if (file) formData.append('resume_file', file);
+
+      try {
+        const response = await fetch('/api/candidate/analyze', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.detail || 'Analysis request failed');
+        }
+
+        const data = await response.json();
+        renderDashboard(data);
+        loadingState.classList.add('hidden');
+        resultsDashboard.classList.remove('hidden');
+      } catch (err) {
+        alert("Error analyzing candidate: " + err.message);
+        loadingState.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    function renderDashboard(data) {
+      const { candidate, role_dna, skill_gaps, next_best_action, readiness } = data;
+      currentActionData = next_best_action;
+
+      // Reset feedback buttons
+      const fbBtns = document.getElementById('feedbackActionButtons');
+      const fbAck = document.getElementById('feedbackAck');
+      if (fbBtns && fbAck) {
+        fbBtns.classList.remove('hidden');
+        fbAck.classList.add('hidden');
+      }
+
+      // 1. ONE Next Best Action Hero Card
+      document.getElementById('heroPrimaryGapBadge').textContent = `Primary Gap: ${next_best_action.primary_gap_targeted}`;
+      document.getElementById('heroLeverageScore').textContent = `${next_best_action.leverage_score}`;
+      document.getElementById('heroActionTitle').textContent = next_best_action.title;
+      document.getElementById('heroActionHeadline').textContent = next_best_action.headline;
+
+      const buildList = document.getElementById('heroBuildList');
+      buildList.innerHTML = next_best_action.what_to_build.map(item => `
+        <li class="flex items-start gap-2">
+          <span class="text-indigo-400 mt-1 font-bold">›</span>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      const artifactList = document.getElementById('heroArtifactList');
+      artifactList.innerHTML = next_best_action.expected_evidence_artifacts.map(art => `
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-400 mt-1 font-bold">✓</span>
+          <span>${art}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('heroWhyThis').textContent = next_best_action.why_this_action;
+      document.getElementById('heroCounterfactual').textContent = next_best_action.counterfactual_comparison;
+      document.getElementById('heroReadinessPreview').textContent = next_best_action.readiness_impact_preview;
+
+      const secondaryContainer = document.getElementById('heroSecondaryGaps');
+      secondaryContainer.innerHTML = next_best_action.secondary_gaps_closed.map(gap => `
+        <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800 text-[10px]">
+          + Closes ${gap}
+        </span>
+      `).join('');
+
+      // 2. Readiness Breakdown
+      document.getElementById('readinessRoleBadge').textContent = readiness.role_title;
+      document.getElementById('readinessVerdict').textContent = readiness.summary_verdict;
+      
+      document.getElementById('strongCount').textContent = readiness.strong_evidence_skills.length;
+      document.getElementById('strongList').innerHTML = readiness.strong_evidence_skills.map(s => 
+        `<span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-xs">${s}</span>`
+      ).join('') || `<span class="text-xs text-slate-500 italic">None detected</span>`;
+
+      document.getElementById('needsCount').textContent = readiness.needs_stronger_evidence_skills.length;
+      document.getElementById('needsList').innerHTML = readiness.needs_stronger_evidence_skills.map(s => 
+        `<span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 text-xs">${s}</span>`
+      ).join('') || `<span class="text-xs text-slate-500 italic">None detected</span>`;
+
+      document.getElementById('majorCount').textContent = readiness.major_gap_skills.length;
+      document.getElementById('majorList').innerHTML = readiness.major_gap_skills.map(s => 
+        `<span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 text-xs">${s}</span>`
+      ).join('') || `<span class="text-xs text-slate-500 italic">None detected</span>`;
+
+      // 3. Ranked Skill Gaps
+      const gapsContainer = document.getElementById('gapsContainer');
+      gapsContainer.innerHTML = skill_gaps.map((g, idx) => {
+        const isTop = idx === 0;
+        return `
+          <div class="border ${isTop ? 'border-indigo-500/80 bg-indigo-950/20' : 'border-slate-800 bg-slate-950/50'} rounded-xl p-4 transition">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold ${isTop ? 'text-indigo-400' : 'text-slate-500'}">#${idx + 1}</span>
+                <span class="text-sm font-bold text-white">${g.skill_name}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded font-semibold uppercase bg-slate-800 text-slate-300">${g.importance}</span>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-500">Priority Score:</span>
+                <span class="text-xs font-bold text-indigo-400 font-mono ml-1">${g.raw_priority_score}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400 mb-2">
+              <div><strong class="text-slate-300">Current Evidence:</strong> ${g.explanation_current_evidence}</div>
+              <div><strong class="text-slate-300">Evidence Deficit:</strong> ${Math.round(g.evidence_deficit * 100)}%</div>
+            </div>
+            <div class="text-[11px] text-slate-500 border-t border-slate-800/80 pt-2">
+              <strong class="text-slate-400">Required Standard:</strong> ${g.missing_evidence_criteria}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 4. Detected Evidence Breakdown
+      document.getElementById('totalSignalsBadge').textContent = candidate.total_evidence_signals;
+      document.getElementById('reposAnalyzedBadge').textContent = candidate.github_repositories_analyzed;
+
+      const detectedGrid = document.getElementById('detectedSkillsGrid');
+      const skillEntries = Object.entries(candidate.skills);
+      if (skillEntries.length === 0) {
+        detectedGrid.innerHTML = `<p class="col-span-3 text-xs text-slate-500 italic p-4 text-center">No skills detected from provided input.</p>`;
+      } else {
+        detectedGrid.innerHTML = skillEntries.map(([k, sk]) => `
+          <div class="border border-slate-800 bg-slate-950/60 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-bold text-white">${sk.skill_name}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-950 text-indigo-400 border border-indigo-900 font-mono">
+                Conf: ${Math.round(sk.aggregated_confidence * 100)}%
+              </span>
+            </div>
+            <div class="text-xs text-slate-400 mb-2">
+              <span class="text-slate-500">Ladder Tier:</span> <strong class="text-slate-300 uppercase">${sk.highest_evidence_type}</strong>
+            </div>
+            <p class="text-xs text-slate-400 mb-3">${sk.evidence_summary}</p>
+            <div class="space-y-1.5 border-t border-slate-800/80 pt-2 max-h-32 overflow-y-auto">
+              ${sk.evidence_items.map(it => `
+                <div class="text-[11px] text-slate-400 bg-slate-900/80 p-1.5 rounded border border-slate-800/60">
+                  <div class="font-semibold text-slate-300 text-[10px] mb-0.5">${it.source_title} (${it.evidence_type})</div>
+                  <div class="truncate text-slate-400">${it.detail}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    let currentActionData = null;
+    function submitFeedback(isUseful) {
+      if (!currentActionData) return;
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action_title: currentActionData.title,
+          target_role: document.getElementById('targetRole').value,
+          is_useful: isUseful
+        })
+      }).then(() => {
+        document.getElementById('feedbackActionButtons').classList.add('hidden');
+        document.getElementById('feedbackAck').classList.remove('hidden');
+      }).catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

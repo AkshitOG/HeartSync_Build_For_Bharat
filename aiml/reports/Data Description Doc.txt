@@ -1,0 +1,130 @@
+--- PAGE 1 ---
+Data Description 
+ 
+There are four data files. Here is a brief description of the files. 
+ 
+File Description 
+Data Science Jobs 
+ 
+Around 1600 rows of sample data describing the number of 
+jobs posted by the leading companies including details like 
+salary, experience and so on in the years 2024-25 
+Analytics Jobs 
+ 
+Around 15800 rows of sample data describing job postings in 
+analytics area including details like job description, 
+designation , location salary and so on in the years 2024-25 
+JDS Skill Traits 
+(Junior Data Scientists) 
+ 
+Around 140 rows of sample data of a company’s skillset data 
+of its junior or entry level data scientists. The data presents 
+measured technical skillsets and outcome like promotion or 
+salary hike (high/low). 
+SDS Personality Traits 
+(Senior Data Scientists) 
+ 
+ 
+Around 160 rows of sample data of a company trait analysis 
+data of its senior and customer facing level data scientists. 
+The data presents measured personality traits and outcome 
+like overall success (high/low). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 2 ---
+Data Dictionaries 
+File: Data Science Jobs 
+Column Brief Description 
+reference_no Row identification number or ID 
+company_name Name of the recruiting company 
+job_title Title of the job 
+min_experience Minimum required experience 
+avg_salary Average salary offered across the job postings for the company 
+min_salary Minimum salary offered across the job postings for the company 
+max_salary Maximum salary offered across the job postings for the company 
+num_of_jobs Number of posting by the company 
+ 
+File: Analytics Jobs 
+Column Brief Description 
+s_no Row identification number or ID 
+experience Years of experience required for the job 
+job_description Typical description of the job 
+job_desig Designation or position of the job role 
+job_type Type or classification of the job 
+key_skills Key skills required for the job 
+location Geo location of the job requirement 
+salary Salary offered 
+ 
+File: JDS Skill Traits 
+Column Brief Description 
+id Row identification number or ID 
+big_data_skills Average score on data skills , summarized on a scale of 1-5 based on 
+multiple tests, training cum evaluations and feedback. 
+maths-stats_skills Average score on quantitative, maths and statistics skills, summarized 
+on a scale of 1-5 based on multiple tests, training cum evaluations and 
+feedback. 
+coding_skills Average score on coding skills on SAS, Python, SQL and so on, 
+summarized on a scale of 1-5 based on multiple tests, training cum 
+evaluations and feedback. 
+ai_and_ml_skills Average score on newer concepts of artificial intelligence and machine 
+learning, summarized on a scale of 1-5 based on multiple tests, training 
+cum evaluations and feedback. 
+dashboard_and_storytelling_skills Average score on visualization, reporting and storytelling, summarized 
+on a scale of 1-5 based on multiple tests, training cum evaluations and 
+feedback. 
+salary_hike_high_or_low A binary variable for performance-based salary hike 1= high, 0 = low 
+ 
+ 
+--- PAGE 3 ---
+File: SDS Personality Traits 
+The file is based on The Big Five Personality Model (the Five-Factor model) and Eysenck 
+Personality Questionnaire (EPQ). 
+Column Brief Description 
+id Row identification number or ID 
+neuroticism It measures the neuroticism which is a fundamental personality 
+trait within the "Big Five" model characterized by a chronic 
+tendency to experience negative emotions, such as anxiety, 
+depression, anger, and self-doubt. The measurement is presented 
+on a normalized score. Higher numbers represent high levels or 
+values. 
+extraversion It measures the extraversion which represents a, spectrum of 
+social engagement, ranging from high energy, outgoing, and 
+assertive (extraverted) to quiet, reserved, and solitary 
+(introverted) behaviours. The measurement is presented on a 
+normalized score. Higher numbers represent high levels or values. 
+openness_to_experience Openness to experience in the Big Five model measures a 
+person's level of creativity, curiosity, and willingness to embrace 
+new ideas, experiences, and unconventional thinking. The 
+measurement is presented on a normalized score. Higher 
+numbers represent high levels or values. 
+agreeableness Agreeableness in the Big Five personality model measures an 
+individual's tendency to be compassionate, cooperative, trusting, 
+and empathetic rather than suspicious or antagonistic. The 
+measurement is presented on a normalized score. Higher 
+numbers represent high levels or values. 
+conscientiousness Conscientiousness in the Big Five model represents a person's 
+tendency to be organized, responsible, hardworking, and goal 
+directed. The measurement is presented on a normalized score. 
+Higher numbers represent high levels or values. 
+success_ classification_ 
+high_low 
+It presents high and low classification of success levels within the 
+organization. 
+ 
+ 
+ 
+ 
+ 
