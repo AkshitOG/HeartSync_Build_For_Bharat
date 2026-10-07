@@ -11,15 +11,39 @@ import json
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 
+import tempfile
+
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data")
 LOCAL_DB_FILE = os.path.join(DATA_DIR, "local_db.json")
+
+# In read-only serverless environments (like Vercel functions where cwd is read-only),
+# store writable state in the OS temp directory
+if os.environ.get("VERCEL") or not os.access(DATA_DIR if os.path.exists(DATA_DIR) else os.path.dirname(__file__), os.W_OK):
+    FALLBACK_DB_FILE = os.path.join(tempfile.gettempdir(), "local_db.json")
+else:
+    FALLBACK_DB_FILE = LOCAL_DB_FILE
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 def _init_local_db():
-    os.makedirs(DATA_DIR, exist_ok=True)
-    if not os.path.exists(LOCAL_DB_FILE):
+    target_file = FALLBACK_DB_FILE
+    target_dir = os.path.dirname(target_file)
+    try:
+        os.makedirs(target_dir, exist_ok=True)
+    except Exception:
+        pass
+
+    if not os.path.exists(target_file):
+        # If seed DB exists in repo, copy it
+        if os.path.exists(LOCAL_DB_FILE):
+            try:
+                with open(LOCAL_DB_FILE, "r", encoding="utf-8") as sf, open(target_file, "w", encoding="utf-8") as df:
+                    df.write(sf.read())
+                return
+            except Exception:
+                pass
+
         initial = {
             "candidates": {},
             "analyses": [],
@@ -41,21 +65,31 @@ def _init_local_db():
                 }
             ]
         }
-        with open(LOCAL_DB_FILE, "w", encoding="utf-8") as f:
-            json.dump(initial, f, indent=2)
+        try:
+            with open(target_file, "w", encoding="utf-8") as f:
+                json.dump(initial, f, indent=2)
+        except Exception:
+            pass
 
 def _read_local_db() -> Dict[str, Any]:
     _init_local_db()
-    try:
-        with open(LOCAL_DB_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return {"candidates": {}, "analyses": [], "feedback": [], "hr_events": []}
+    for fpath in [FALLBACK_DB_FILE, LOCAL_DB_FILE]:
+        if os.path.exists(fpath):
+            try:
+                with open(fpath, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+    return {"candidates": {}, "analyses": [], "feedback": [], "hr_events": []}
 
 def _write_local_db(data: Dict[str, Any]) -> None:
     _init_local_db()
-    with open(LOCAL_DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+    try:
+        with open(FALLBACK_DB_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+    except Exception:
+        # Gracefully handle write errors in serverless containers
+        pass
 
 def save_candidate_profile(candidate_id: str, candidate_data: Dict[str, Any]) -> Dict[str, Any]:
     db = _read_local_db()

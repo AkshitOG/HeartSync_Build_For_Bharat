@@ -1,26 +1,32 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   HROverviewResponse,
   DailyBriefResponse,
-  HRInsightItem,
-  HRDeskQAResponse
+  HRInsightItem
 } from "@/types/hr";
 import {
   fetchHROverview,
   fetchDailyBrief,
   fetchHRInsights,
-  queryHRDesk,
   fetchModelResults
 } from "@/lib/api";
+import {
+  getWorkforceOverviewMetrics,
+  getDepartmentSummaries,
+  getDailyBriefItems,
+  getStrategicInsights
+} from "@/lib/workforceData";
+import { queryHRDeskService, HRDeskQueryResult } from "@/lib/hrDeskService";
 
 export function HRDashboard() {
   const [overview, setOverview] = useState<HROverviewResponse | null>(null);
   const [dailyBrief, setDailyBrief] = useState<DailyBriefResponse | null>(null);
   const [insights, setInsights] = useState<HRInsightItem[]>([]);
   const [queryInput, setQueryInput] = useState("");
-  const [qaResult, setQaResult] = useState<HRDeskQAResponse | null>(null);
+  const [qaResult, setQaResult] = useState<HRDeskQueryResult | null>(null);
   const [isQuerying, setIsQuerying] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showModelModal, setShowModelModal] = useState(false);
@@ -30,18 +36,54 @@ export function HRDashboard() {
     async function loadHRData() {
       try {
         setLoading(true);
-        const [ov, db, ins, md] = await Promise.all([
+        // Attempt backend fetch with fallback to deterministic local datasets
+        const [ovRes, dbRes, insRes, mdRes] = await Promise.allSettled([
           fetchHROverview(),
           fetchDailyBrief(),
           fetchHRInsights(),
           fetchModelResults()
         ]);
-        setOverview(ov);
-        setDailyBrief(db);
-        setInsights(ins);
-        setModelData(md);
+
+        if (ovRes.status === "fulfilled" && ovRes.value?.overview) {
+          setOverview(ovRes.value);
+        } else {
+          setOverview({
+            overview: getWorkforceOverviewMetrics(),
+            departments: getDepartmentSummaries()
+          });
+        }
+
+        if (dbRes.status === "fulfilled" && dbRes.value?.items) {
+          setDailyBrief(dbRes.value);
+        } else {
+          setDailyBrief({
+            date: "Today's Executive Brief",
+            attention_items_count: 3,
+            items: getDailyBriefItems()
+          });
+        }
+
+        if (insRes.status === "fulfilled" && insRes.value?.length) {
+          setInsights(insRes.value);
+        } else {
+          setInsights(getStrategicInsights());
+        }
+
+        if (mdRes.status === "fulfilled") {
+          setModelData(mdRes.value);
+        }
       } catch (err) {
-        console.error("Failed to load HR data", err);
+        console.warn("Using deterministic fallback dataset for HR telemetry:", err);
+        setOverview({
+          overview: getWorkforceOverviewMetrics(),
+          departments: getDepartmentSummaries()
+        });
+        setDailyBrief({
+          date: "Today's Executive Brief",
+          attention_items_count: 3,
+          items: getDailyBriefItems()
+        });
+        setInsights(getStrategicInsights());
       } finally {
         setLoading(false);
       }
@@ -55,12 +97,19 @@ export function HRDashboard() {
     setQueryInput(text);
     setIsQuerying(true);
     try {
-      const res = await queryHRDesk(text);
+      const res = await queryHRDeskService(text);
       setQaResult(res);
     } catch (err) {
       console.error("Query failed", err);
     } finally {
       setIsQuerying(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleQuery(queryInput);
     }
   };
 
@@ -100,15 +149,25 @@ export function HRDashboard() {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowModelModal(true)}
-          className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 hover:text-white transition flex items-center gap-2 shrink-0 self-start md:self-auto cursor-pointer shadow-xs"
-        >
-          <svg className="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          View Model Evaluation (CV Results) ↗
-        </button>
+        <div className="flex items-center gap-2.5 shrink-0 self-start md:self-auto flex-wrap">
+          <Link
+            href="/hr/model-evaluation"
+            className="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-xs font-semibold text-white transition flex items-center gap-2 cursor-pointer shadow-xs"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            View Model Evaluation (CV Results) ↗
+          </Link>
+          <button
+            type="button"
+            onClick={() => setShowModelModal(true)}
+            className="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition cursor-pointer"
+            title="Quick Modal Audit"
+          >
+            Quick Modal
+          </button>
+        </div>
       </div>
 
       {/* 1. Workforce Overview KPI Grid */}
@@ -205,7 +264,15 @@ export function HRDashboard() {
                 3 Priority Action Items Requiring Attention
               </h3>
             </div>
-            <span className="text-xs font-mono text-slate-500">{dailyBrief.date}</span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-mono text-slate-500">{dailyBrief.date}</span>
+              <Link
+                href="/hr/daily-brief"
+                className="text-xs font-semibold text-teal-600 hover:text-teal-700 underline"
+              >
+                View Full Brief →
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -254,16 +321,24 @@ export function HRDashboard() {
 
       {/* 3. AI HR Desk: Natural Language Inquiry Console */}
       <section className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs">
-        <div className="mb-4">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal-700 mb-1">
-            <span>💬</span> AI HR Intelligence Desk
+        <div className="mb-4 flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal-700 mb-1">
+              <span>💬</span> AI HR Intelligence Desk
+            </div>
+            <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">
+              Workforce Inquiry Console (Answer + Evidence + Action)
+            </h3>
+            <p className="text-xs text-slate-600 mt-0.5">
+              Ask any question about workforce workload, attendance patterns, burnout risk, or department status.
+            </p>
           </div>
-          <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">
-            Workforce Inquiry Console (Answer + Evidence + Action)
-          </h3>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Ask any question about workforce workload, attendance patterns, burnout risk, or department status.
-          </p>
+          <Link
+            href="/hr/ai-desk"
+            className="text-xs font-semibold text-teal-600 hover:text-teal-700 underline"
+          >
+            Open Dedicated AI Desk →
+          </Link>
         </div>
 
         {/* Quick Question Pills */}
@@ -273,7 +348,7 @@ export function HRDashboard() {
               key={i}
               type="button"
               onClick={() => handleQuery(sq)}
-              className="text-[11px] px-3 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 transition cursor-pointer shadow-xs font-medium"
+              className="text-[11px] px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-200 border border-slate-200 text-slate-700 transition cursor-pointer shadow-xs font-medium"
             >
               &ldquo;{sq}&rdquo;
             </button>
@@ -286,19 +361,25 @@ export function HRDashboard() {
             e.preventDefault();
             handleQuery(queryInput);
           }}
-          className="flex gap-2 mb-4"
+          className="flex flex-col sm:flex-row gap-2 mb-4"
         >
-          <input
-            type="text"
-            value={queryInput}
-            onChange={(e) => setQueryInput(e.target.value)}
-            placeholder="Type your HR question (e.g. Which team is experiencing high workload?)..."
-            className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 placeholder-slate-400 transition shadow-xs"
-          />
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={queryInput}
+              onChange={(e) => setQueryInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type your HR question (e.g. Which team is experiencing high workload?)..."
+              className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 placeholder-slate-400 transition shadow-xs"
+            />
+            <span className="absolute right-3 top-2.5 text-[10px] text-slate-400 hidden sm:inline">
+              Press Enter ↵
+            </span>
+          </div>
           <button
             type="submit"
             disabled={isQuerying}
-            className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-xs transition disabled:bg-teal-300 cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-xs transition disabled:bg-teal-300 cursor-pointer shrink-0"
           >
             {isQuerying ? "Analyzing..." : "Ask Desk →"}
           </button>
@@ -306,14 +387,19 @@ export function HRDashboard() {
 
         {/* Structured QA Output */}
         {qaResult && (
-          <div className="bg-slate-50 border border-teal-200 rounded-xl p-5 space-y-3 animate-fade-in shadow-xs">
-            <div className="flex items-center justify-between">
+          <div className="bg-slate-50 border border-teal-200 rounded-xl p-5 space-y-3.5 animate-fade-in shadow-xs">
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <span className="text-xs font-mono text-slate-600">
                 Query: <strong className="text-slate-900">&ldquo;{qaResult.query}&rdquo;</strong>
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 font-semibold">
-                {qaResult.confidence}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-medium">
+                  {qaResult.dataSource}
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 font-semibold">
+                  {qaResult.confidence}
+                </span>
+              </div>
             </div>
 
             <div>
@@ -326,22 +412,34 @@ export function HRDashboard() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-slate-200">
-              <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
-                <strong className="text-[11px] uppercase tracking-wider text-slate-500 block mb-1">
+              <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
+                <strong className="text-[11px] uppercase tracking-wider text-slate-500 block mb-1.5">
                   Evidence Trail:
                 </strong>
-                <p className="text-xs text-slate-700 leading-relaxed">
-                  {qaResult.evidence}
-                </p>
+                {Array.isArray(qaResult.evidence) ? (
+                  <ul className="text-xs text-slate-700 space-y-1 list-disc list-inside">
+                    {qaResult.evidence.map((ev, i) => (
+                      <li key={i} className="leading-relaxed">{ev}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-xs text-slate-700 leading-relaxed">{qaResult.evidence}</p>
+                )}
               </div>
 
-              <div className="bg-emerald-50/60 p-3 rounded-lg border border-emerald-200 shadow-xs">
-                <strong className="text-[11px] uppercase tracking-wider text-emerald-800 block mb-1">
+              <div className="bg-emerald-50/60 p-3.5 rounded-lg border border-emerald-200 shadow-xs">
+                <strong className="text-[11px] uppercase tracking-wider text-emerald-800 block mb-1.5">
                   Recommended Action:
                 </strong>
-                <p className="text-xs text-emerald-900 leading-relaxed">
-                  {qaResult.recommended_action}
-                </p>
+                {Array.isArray(qaResult.recommended_action) ? (
+                  <ul className="text-xs text-emerald-900 space-y-1 list-disc list-inside">
+                    {qaResult.recommended_action.map((act, i) => (
+                      <li key={i} className="leading-relaxed">{act}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-xs text-emerald-900 leading-relaxed">{qaResult.recommended_action}</p>
+                )}
               </div>
             </div>
           </div>
@@ -351,16 +449,24 @@ export function HRDashboard() {
       {/* 4. Strategic Workforce Insights */}
       {insights.length > 0 && (
         <section className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs">
-          <div className="mb-4">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal-700 mb-1">
-              <span>📈</span> Strategic Workforce Insights
+          <div className="mb-4 flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal-700 mb-1">
+                <span>📈</span> Strategic Workforce Insights
+              </div>
+              <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">
+                Capability Design &amp; Organizational Intelligence
+              </h3>
+              <p className="text-xs text-slate-600 mt-0.5">
+                Connecting internal skill telemetry, retention factors, and market transitions.
+              </p>
             </div>
-            <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">
-              Capability Design &amp; Organizational Intelligence
-            </h3>
-            <p className="text-xs text-slate-600 mt-0.5">
-              Connecting internal skill telemetry, retention factors, and market transitions.
-            </p>
+            <Link
+              href="/hr/workforce-insights"
+              className="text-xs font-semibold text-teal-600 hover:text-teal-700 underline"
+            >
+              Explore Full Insights →
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -478,7 +584,13 @@ export function HRDashboard() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex justify-end">
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <Link
+                href="/hr/model-evaluation"
+                className="text-xs font-semibold text-teal-600 hover:text-teal-700 underline"
+              >
+                Go to Dedicated Model Evaluation Page →
+              </Link>
               <button
                 onClick={() => setShowModelModal(false)}
                 className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition cursor-pointer shadow-sm"

@@ -40,3 +40,11 @@ env/
 .DS_Store
 Thumbs.db
 *.log
+
+# Agents
+.agents/
+.agent/
+_agents/
+_agent/
+agents/
+

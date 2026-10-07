@@ -66,8 +66,8 @@ export function CandidateIntelligence({ candidate }: CandidateIntelligenceProps)
                     </span>
                   </div>
 
-                  {/* Dual Provenance Tag */}
-                  <div className="mb-2">
+                  {/* Dual Provenance Tag & Evidence Strength */}
+                  <div className="flex flex-wrap items-center gap-1.5 mb-2">
                     <span
                       className={`text-[9px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider border ${
                         hasGitHub
@@ -75,8 +75,13 @@ export function CandidateIntelligence({ candidate }: CandidateIntelligenceProps)
                           : "bg-slate-100 text-slate-700 border border-slate-200"
                       }`}
                     >
-                      {hasGitHub ? "✓ Externally Verified (GitHub)" : "📝 Resume Self-Reported"}
+                      {sk.evidence_strength ? `${sk.evidence_strength}: ` : ""}{hasGitHub ? "✓ Project Verified (GitHub)" : "📝 Resume Self-Reported"}
                     </span>
+                    {sk.current_level && (
+                      <span className="text-[9px] px-2 py-0.5 rounded-full font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        {sk.current_level}
+                      </span>
+                    )}
                   </div>
 
                   <div className="text-xs text-slate-600 mb-2">
@@ -85,6 +90,12 @@ export function CandidateIntelligence({ candidate }: CandidateIntelligenceProps)
                       {sk.highest_evidence_type}
                     </strong>
                   </div>
+
+                  {sk.verified_projects && sk.verified_projects.length > 0 && (
+                    <div className="text-[11px] text-slate-700 mb-2 bg-emerald-50/50 border border-emerald-200/50 p-1.5 rounded-md">
+                      <span className="font-semibold text-emerald-900">Project:</span> {sk.verified_projects.join(", ")}
+                    </div>
+                  )}
 
                   <p className="text-xs text-slate-600 mb-3 leading-relaxed">
                     {sk.evidence_summary}

@@ -136,6 +136,102 @@
       "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
       "coverage_pct": 31.7,
       "timestamp": "2026-10-07T15:11:18.380318+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:26:02.009597+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:26:02.235158+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:34:28.516748+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:34:28.670117+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:37:44.315255+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:37:44.474192+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:55:46.479825+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:55:46.694865+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:57:26.077621+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:57:26.212994+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "backend-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Backend Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "coverage_pct": 16.9,
+      "timestamp": "2026-10-07T17:59:50.696434+00:00"
+    },
+    {
+      "candidate_name": "Candidate",
+      "target_role": "machine-learning-engineer",
+      "readiness_verdict": "Substantial evidence deficits for Machine Learning Engineer. High-leverage portfolio projects required.",
+      "primary_action": "Develop an End-to-End Model Inference Service & Benchmark Suite",
+      "coverage_pct": 31.7,
+      "timestamp": "2026-10-07T17:59:51.033992+00:00"
     }
   ],
   "feedback": [
@@ -211,6 +307,48 @@
     },
     {
       "timestamp": "2026-10-07T15:11:18.266510+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:26:02.041860+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:34:28.536289+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:37:44.330304+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:55:46.509670+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:57:26.094100+00:00",
+      "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
+      "target_role": "backend-engineer",
+      "is_useful": true,
+      "candidate_comment": "Clear prioritization and concrete deliverables."
+    },
+    {
+      "timestamp": "2026-10-07T17:59:50.743928+00:00",
       "action_title": "Build & Deploy a Production-Grade Data-Driven Service with PostgreSQL",
       "target_role": "backend-engineer",
       "is_useful": true,

@@ -2,15 +2,18 @@ import sys
 import traceback
 from pathlib import Path
 
-# Add src to sys.path so careergps can be imported cleanly
-src_path = str(Path(__file__).parent / "src")
-if src_path not in sys.path:
-    sys.path.insert(0, src_path)
+root_dir = Path(__file__).parent.parent
+backend_dir = root_dir / "backend"
+backend_src = backend_dir / "src"
+
+if str(backend_src) not in sys.path:
+    sys.path.insert(0, str(backend_src))
+if str(backend_dir) not in sys.path:
+    sys.path.insert(0, str(backend_dir))
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-# Top-level application declaration required by Vercel AST builder
 app = FastAPI(title="CareerGPS Platform")
 
 startup_error = None

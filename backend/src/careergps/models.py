@@ -33,6 +33,9 @@ class SkillEvidence(BaseModel):
     highest_evidence_type: EvidenceType = EvidenceType.CLAIM
     aggregated_confidence: float = Field(ge=0.0, le=1.0)
     evidence_summary: str
+    current_level: str = "Beginner"                     # Beginner, Intermediate, Advanced
+    evidence_strength: str = "SELF-REPORTED"           # STRONG (backed by projects) vs SELF-REPORTED
+    verified_projects: List[str] = []
 
 class CandidateIntelligence(BaseModel):
     raw_name: Optional[str] = None
@@ -85,6 +88,12 @@ class SkillGap(BaseModel):
     explanation_why_matters: str
     explanation_current_evidence: str
     missing_evidence_criteria: str
+    current_level: str = "Beginner"         # Beginner, Intermediate, Advanced
+    required_level: str = "Advanced"        # Beginner, Intermediate, Advanced
+    gap_level: str = "Moderate"             # None, Partial Gap / Moderate, High
+    reason: Optional[str] = None
+    what_is_missing: Optional[str] = None
+    project_evidence: List[str] = []
 
 class NextBestAction(BaseModel):
     title: str

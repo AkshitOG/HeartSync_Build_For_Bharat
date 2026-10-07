@@ -13,23 +13,48 @@ import {
   HRDeskQAResponse
 } from "@/types/hr";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL !== undefined && process.env.NEXT_PUBLIC_API_URL !== ""
-    ? process.env.NEXT_PUBLIC_API_URL
-    : typeof window !== "undefined"
-      ? ""
-      : process.env.BACKEND_URL !== undefined && process.env.BACKEND_URL !== ""
-        ? process.env.BACKEND_URL
-        : "http://127.0.0.1:8000";
+// Determine API Base URL safely across development, local testing, and production (Vercel)
+function resolveApiBaseUrl(): string {
+  // If in browser, check the hostname
+  if (typeof window !== "undefined") {
+    const isLocal =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "0.0.0.0";
 
-// Resilient API fetcher with automatic Next.js proxy fallback
+    // If deployed on Vercel or any live host, ALWAYS use relative path ""
+    // This allows Vercel service rewrites to route /api to the backend without CORS or localhost issues
+    if (!isLocal) {
+      return "";
+    }
+
+    // In local dev browser, use NEXT_PUBLIC_API_URL if configured, otherwise fallback to "" (proxy)
+    if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes("localhost:8000") && !process.env.NEXT_PUBLIC_API_URL.includes("127.0.0.1:8000")) {
+      return process.env.NEXT_PUBLIC_API_URL;
+    }
+    return ""; // uses Next.js rewrite proxy on local dev
+  }
+
+  // Server-side execution (Node / SSR)
+  if (process.env.BACKEND_URL && process.env.BACKEND_URL !== "") {
+    return process.env.BACKEND_URL;
+  }
+  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL !== "") {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  return "http://127.0.0.1:8000";
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
+
+// Resilient API fetcher with automatic fallback
 async function apiFetch(path: string, init?: RequestInit): Promise<Response> {
   const fullUrl = API_BASE_URL ? `${API_BASE_URL}${path}` : path;
   try {
     const res = await fetch(fullUrl, init);
     return res;
   } catch (err) {
-    // If direct cross-origin fetch fails on localhost, retry via Next.js rewrite proxy
+    // If direct cross-origin fetch fails, retry via relative path
     if (API_BASE_URL && typeof window !== "undefined" && fullUrl !== path) {
       try {
         return await fetch(path, init);
@@ -113,8 +138,15 @@ export async function analyzeCandidate(formData: FormData): Promise<AnalysisResp
     body: formData,
   });
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.detail || "Analysis failed. Please check inputs and try again.");
+    const text = await res.text().catch(() => "");
+    let detail = "";
+    try {
+      const err = JSON.parse(text);
+      detail = err.detail || err.error || err.message;
+    } catch {
+      detail = text.slice(0, 300);
+    }
+    throw new Error(detail || `Server responded with status ${res.status}: ${res.statusText}`);
   }
   return res.json();
 }

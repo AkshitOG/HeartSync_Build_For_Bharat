@@ -57,7 +57,7 @@ app.add_middleware(
         "http://localhost:3001",
         "http://127.0.0.1:3001",
     ],
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1|.*\.vercel\.app)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -315,8 +315,11 @@ async def record_feedback(payload: FeedbackRequest):
         "is_useful": payload.is_useful,
         "candidate_comment": payload.candidate_comment or ""
     }
-    with open(FEEDBACK_LOG_PATH, "a", encoding="utf-8") as f:
-        f.write(json.dumps(record) + "\n")
+    try:
+        with open(FEEDBACK_LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record) + "\n")
+    except Exception:
+        pass
     record_feedback_item(record)
     return {"status": "success", "message": "Feedback recorded"}
 

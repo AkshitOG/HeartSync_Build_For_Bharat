@@ -125,9 +125,21 @@
     },
     {
       "query_triggers": ["support", "burnout", "turnover", "risk", "stress"],
-      "answer": "The senior backend engineers (Tech Lead & 2 Staff Engineers) represent the highest burnout risk due to task concentration.",
+      "answer": "The senior backend engineers (Tech Lead & Staff Engineers) represent the highest burnout risk due to task concentration.",
       "evidence": "Working hours logged show consecutive 50+ hour sprint weeks over the last 3 release cycles.",
       "recommended_action": "Shift non-critical maintenance tasks to the upcoming sprint and provide comp-off recharge days."
+    },
+    {
+      "query_triggers": ["highest", "team", "highest workload", "max workload"],
+      "answer": "The Engineering team has the highest workload across the workforce, operating at an 87% average workload with 14 pending critical tasks.",
+      "evidence": "Engineering workload is 87% compared to Operations (74%), Data & Analytics (68%), Product & Design (64%), and Client Solutions (62%).",
+      "recommended_action": "Reassign non-critical sprint tasks to subsequent delivery milestones and reduce review dependencies on senior staff."
+    },
+    {
+      "query_triggers": ["employees", "need", "attention", "hr attention", "intervention"],
+      "answer": "HR attention is urgently required for employees with High risk level in Engineering (due to burnout strain and 50+ hr sprints) and Operations (due to chronic Monday absenteeism).",
+      "evidence": "Engineering: Aarav Sharma (Tech Lead), Rohan Verma (Staff Engineer), Vikram Malhotra (Staff Engineer). Operations: Kavita Rao, Deepak Joshi, Suresh Kumar.",
+      "recommended_action": "Conduct 1-on-1 check-ins with Engineering leads to unblock code reviews, and meet with Operations staff to adjust Monday shift timings."
     }
   ]
 }

@@ -49,7 +49,9 @@ export interface HRInsightItem {
 export interface HRDeskQAResponse {
   query: string;
   answer: string;
-  evidence: string;
-  recommended_action: string;
+  evidence: string | string[];
+  recommended_action: string | string[];
   confidence: string;
+  dataSource?: string;
 }
+

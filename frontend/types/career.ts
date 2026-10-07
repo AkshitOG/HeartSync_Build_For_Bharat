@@ -25,6 +25,9 @@ export interface SkillEvidence {
   highest_evidence_type: EvidenceType;
   aggregated_confidence: number;
   evidence_summary: string;
+  current_level?: "Beginner" | "Intermediate" | "Advanced" | string;
+  evidence_strength?: "STRONG" | "SELF-REPORTED" | string;
+  verified_projects?: string[];
 }
 
 export interface CandidateIntelligence {
@@ -86,6 +89,12 @@ export interface SkillGap {
   explanation_why_matters: string;
   explanation_current_evidence: string;
   missing_evidence_criteria: string;
+  current_level?: "Beginner" | "Intermediate" | "Advanced" | string;
+  required_level?: "Beginner" | "Intermediate" | "Advanced" | string;
+  gap_level?: "None" | "Moderate" | "High" | string;
+  reason?: string | null;
+  what_is_missing?: string | null;
+  project_evidence?: string[];
 }
 
 export interface NextBestAction {
