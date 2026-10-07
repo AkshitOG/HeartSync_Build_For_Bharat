@@ -125,27 +125,27 @@ export default function CandidatePage() {
 
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8">
           {/* Candidate Product Hero Banner */}
-          <div id="overview" className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs">
+          <div id="overview" className="bg-white border border-slate-300 rounded-lg p-5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wider font-mono">
-                    Target Role Benchmark
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300 uppercase">
+                    Role DNA Target
                   </span>
-                  <span className="text-xs font-semibold text-blue-700">
+                  <span className="text-xs font-bold text-slate-900">
                     {selectedRoleTitle}
                   </span>
                 </div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                  Verifiable Evidence &amp; High-Leverage Career Intelligence
+                <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+                  Candidate Intelligence &amp; Skill Gap Analysis
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
-                  Evaluates candidate code and professional history against calibrated Target Role DNA (derived from 15,841 market postings) to identify level-based skill deficits and recommend the single highest-leverage next project.
+                <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                  Calibrated evidence comparison against market benchmarks (15,841 postings). Evaluates current practical level vs role requirement.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-xl px-3 py-2 shadow-2xs shrink-0">
-                <span className="text-xs text-slate-500 font-medium">Target:</span>
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded px-3 py-1.5 shrink-0">
+                <span className="text-xs text-slate-600 font-medium">Select Role:</span>
                 <select
                   value={selectedRoleId}
                   onChange={(e) => {
@@ -153,7 +153,7 @@ export default function CandidatePage() {
                     const matched = roles.find((r) => r.role_id === e.target.value);
                     if (matched) setSelectedRoleTitle(matched.title);
                   }}
-                  className="bg-transparent text-xs font-bold text-slate-900 focus:outline-none cursor-pointer"
+                  className="bg-transparent text-xs font-semibold text-slate-900 focus:outline-none cursor-pointer"
                 >
                   {roles.map((r) => (
                     <option key={r.role_id} value={r.role_id} className="bg-white text-slate-800">

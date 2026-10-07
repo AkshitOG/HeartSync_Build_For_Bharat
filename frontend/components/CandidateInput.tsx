@@ -124,53 +124,42 @@ B.S. in Statistics & Data Analytics | Metro University (2018 - 2022)
   };
 
   return (
-    <section className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-xs">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+    <section className="bg-white border border-slate-300 rounded-lg p-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-3 border-b border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[11px] font-semibold text-blue-700 mb-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
-            Evidence-Grounded Candidate Intake
-          </div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-            Analyze Candidate Evidence vs. Role DNA
+          <h2 className="text-base font-bold text-slate-900">
+            Candidate Intake &amp; Analysis
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
-            Upload resume and GitHub profile. CareerGPS calculates genuine evidence deficits and generates the single highest-leverage action.
+          <p className="text-xs text-slate-600 mt-0.5">
+            Provide candidate resume text or PDF and optional GitHub username.
           </p>
         </div>
 
         {/* 1-Click Demo Profiles */}
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 011.342.447l1 2a1 1 0 01-.447 1.342l-1.599.8 1.599.8a1 1 0 01.447 1.342l-1 2a1 1 0 01-1.342.447l-1.599-.8L11 15.677V17a1 1 0 11-2 0v-1.323l-3.954-1.582-1.599.8a1 1 0 01-1.342-.447l-1-2a1 1 0 01.447-1.342l1.599-.8-1.599-.8A1 1 0 01.553 7.894l1-2a1 1 0 011.342-.447l1.599.8L9 4.323V3a1 1 0 011-1z" />
-            </svg>
-            Instant Demo Profiles
-          </span>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => handleSelectDemo("alex-sharma")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition border cursor-pointer ${
-                activeDemo === "alex-sharma"
-                  ? "bg-blue-50 border-blue-300 text-blue-700 shadow-xs"
-                  : "bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900"
-              }`}
-            >
-              Alex Sharma (Backend)
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSelectDemo("priya-patel")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition border cursor-pointer ${
-                activeDemo === "priya-patel"
-                  ? "bg-blue-50 border-blue-300 text-blue-700 shadow-xs"
-                  : "bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900"
-              }`}
-            >
-              Priya Patel (Data Scientist)
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-slate-500">Quick Test:</span>
+          <button
+            type="button"
+            onClick={() => handleSelectDemo("alex-sharma")}
+            className={`px-2.5 py-1 rounded text-xs font-medium border cursor-pointer ${
+              activeDemo === "alex-sharma"
+                ? "bg-slate-900 text-white border-slate-900"
+                : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Alex Sharma (Backend)
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSelectDemo("priya-patel")}
+            className={`px-2.5 py-1 rounded text-xs font-medium border cursor-pointer ${
+              activeDemo === "priya-patel"
+                ? "bg-slate-900 text-white border-slate-900"
+                : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Priya Patel (Data Scientist)
+          </button>
         </div>
       </div>
 

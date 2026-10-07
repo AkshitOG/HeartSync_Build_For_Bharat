@@ -24,44 +24,35 @@ export function NextBestAction({ action, targetRole }: NextBestActionProps) {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-slate-300/80 bg-white p-6 sm:p-8 shadow-xs">
-      {/* Subtle top indicator bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-blue-600" />
-
+    <section className="bg-white border border-slate-300 rounded-lg p-5">
       {/* Top Header Status */}
-      <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
-        <div className="flex items-center gap-2.5 flex-wrap">
-          <span className="px-3 py-1 rounded-md bg-blue-600 text-white font-bold text-[11px] tracking-wider uppercase">
-            Primary Career Recommendation
+      <div className="flex items-center justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-slate-200">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="px-2 py-0.5 rounded bg-blue-700 text-white font-mono text-xs font-semibold uppercase">
+            Recommended Action
           </span>
-          <span className="text-xs px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200/80 font-medium">
-            Primary Gap Targeted: <strong className="font-semibold text-slate-900">{action.primary_gap_targeted}</strong>
+          <span className="text-xs text-slate-700 font-medium">
+            Targets: <strong className="font-semibold text-slate-900">{action.primary_gap_targeted}</strong>
           </span>
         </div>
-        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1 rounded-lg">
-          <span className="text-xs text-slate-500 font-medium">Algorithmic Leverage:</span>
-          <span className="text-xs font-bold text-blue-700 font-mono">
-            {action.leverage_score} / 100
-          </span>
+        <div className="text-xs font-mono text-slate-600">
+          Leverage Score: <strong className="text-slate-900">{action.leverage_score}</strong>
         </div>
       </div>
 
       {/* Hero Title & Headline */}
-      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mb-2 leading-tight">
+      <h3 className="text-lg font-bold text-slate-900 tracking-tight mb-1">
         {action.title}
       </h3>
-      <p className="text-sm text-slate-600 mb-6 leading-relaxed max-w-4xl">
+      <p className="text-xs text-slate-600 mb-4 leading-relaxed">
         {action.headline}
       </p>
 
       {/* Grid: What to Build vs Verifiable Evidence Artifacts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-        <div className="bg-slate-50/80 border border-slate-200/80 rounded-xl p-5">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3.5 flex items-center gap-2">
-            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            What You Must Build
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="bg-slate-50 border border-slate-200 rounded p-3.5">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2">
+            Build Specifications
           </h4>
           <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
             {action.what_to_build.map((item, idx) => (
